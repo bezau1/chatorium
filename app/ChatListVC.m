@@ -1,12 +1,16 @@
 #import "ChatListVC.h"
 #import "ChatVC.h"
 #import "Hub.h"
+#import "Theme.h"
 #import <CoreImage/CoreImage.h>
 
 @implementation ChatListVC { NSArray<NSDictionary *> *_chats; }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Chatorium";
+    self.title = @"CHATORIUM";
+    self.tableView.backgroundColor = Theme.base;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerClass:CardCell.class forCellReuseIdentifier:@"c"];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(reload) name:HubDidUpdate object:nil];
     [self reload];
 }
@@ -28,10 +32,12 @@
     [f setValue:[code dataUsingEncoding:NSUTF8StringEncoding] forKey:@"inputMessage"];
     CIImage *img = [f.outputImage imageByApplyingTransform:CGAffineTransformMakeScale(8, 8)];
     UIViewController *vc = [UIViewController new];
-    vc.view.backgroundColor = UIColor.whiteColor;
+    vc.view.backgroundColor = Theme.base;
     UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageWithCIImage:img]];
     iv.contentMode = UIViewContentModeScaleAspectFit;
     iv.frame = CGRectInset(vc.view.bounds, 20, 80);
+    iv.backgroundColor = UIColor.whiteColor; // QR needs light quiet zone to scan
+    iv.layer.borderWidth = 2; iv.layer.borderColor = Theme.text.CGColor;
     iv.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [vc.view addSubview:iv];
     vc.title = @"WhatsApp → Linked devices → Link a device";
@@ -39,11 +45,13 @@
 }
 - (NSInteger)tableView:(UITableView *)t numberOfRowsInSection:(NSInteger)s { return _chats.count; }
 - (UITableViewCell *)tableView:(UITableView *)t cellForRowAtIndexPath:(NSIndexPath *)ip {
-    UITableViewCell *c = [t dequeueReusableCellWithIdentifier:@"c"] ?: [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"c"];
+    CardCell *c = [t dequeueReusableCellWithIdentifier:@"c" forIndexPath:ip];
     NSDictionary *m = _chats[ip.row];
-    NSString *name = [m[@"chatName"] length] ? m[@"chatName"] : m[@"chat"];
-    c.textLabel.text = [NSString stringWithFormat:@"[%@] %@", m[@"platform"], name];
-    c.detailTextLabel.text = m[@"text"];
+    c.titleLabel.text = [m[@"chatName"] length] ? m[@"chatName"] : m[@"chat"];
+    c.bodyLabel.text = m[@"text"];
+    c.bodyLabel.numberOfLines = 2;
+    c.badgeLabel.text = [NSString stringWithFormat:@" %@ ", [m[@"platform"] uppercaseString]];
+    c.badgeLabel.backgroundColor = [Theme colorForPlatform:m[@"platform"]];
     return c;
 }
 - (void)tableView:(UITableView *)t didSelectRowAtIndexPath:(NSIndexPath *)ip {

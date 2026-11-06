@@ -16,7 +16,7 @@ Target: iOS 15, rootless (`THEOS_PACKAGE_SCHEME=rootless`), private use.
 
 * **hub/** – `chatoriumd`: routes UI ⇄ connectors, stores history encrypted at rest (`store.key` random per install).
 * **tweaks/imessage/** – SpringBoard tweak: incoming iMessages from `sms.db`, outgoing through IMCore.
-* **app/** – the unified inbox UI. Pairing QR for WhatsApp is shown here. "Call" opens the real app (FaceTime / WhatsApp / Telegram).
+* **app/** – the unified inbox UI, styled Catppuccin Mocha with square corners, 2pt borders and hard offset shadows (`app/Theme.{h,m}`). Pairing QR for WhatsApp is shown here. "Call" opens the real app (FaceTime / WhatsApp / Telegram).
 
 ## Build
 

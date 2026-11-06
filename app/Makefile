@@ -1,5 +1,5 @@
 APPLICATION_NAME = Chatorium
-Chatorium_FILES = main.m AppDelegate.m Hub.m ChatListVC.m ChatVC.m
+Chatorium_FILES = main.m AppDelegate.m Hub.m Theme.m ChatListVC.m ChatVC.m
 Chatorium_CFLAGS = -fobjc-arc
 Chatorium_FRAMEWORKS = UIKit CoreImage
 Chatorium_CODESIGN_FLAGS = -Sentitlements.plist

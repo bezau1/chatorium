@@ -6,6 +6,7 @@
 <key>CFBundleDisplayName</key><string>Chatorium</string>
 <key>CFBundleExecutable</key><string>Chatorium</string>
 <key>CFBundleVersion</key><string>0.0.1</string>
+<key>UIUserInterfaceStyle</key><string>Dark</string>
 <key>UIDeviceFamily</key><array><integer>1</integer></array>
 <key>LSApplicationQueriesSchemes</key><array><string>whatsapp</string><string>tg</string><string>facetime</string><string>sms</string></array>
 </dict></plist>
