@@ -1,0 +1,10 @@
+#!/bin/sh
+PLIST=/var/jb/Library/LaunchDaemons/com.bezau1.chatoriumd.plist
+mkdir -p /var/jb/var/mobile/Library/Chatorium
+chown -R mobile:mobile /var/jb/var/mobile/Library/Chatorium 2>/dev/null
+chown root:wheel "$PLIST" 2>/dev/null; chmod 644 "$PLIST" 2>/dev/null
+launchctl unload "$PLIST" 2>/dev/null
+launchctl load "$PLIST"
+uicache -p /var/jb/Applications/Chatorium.app 2>/dev/null
+killall -9 SpringBoard 2>/dev/null   # load the iMessage tweak
+exit 0

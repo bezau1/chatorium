@@ -21,7 +21,7 @@ Target: iOS 15, rootless (`THEOS_PACKAGE_SCHEME=rootless`), private use.
 ## Build
 
 ```bash
-make hub            # static arm64 Go daemon -> app/layout/usr/local/bin/chatoriumd
+make hub            # static arm64 Go daemon -> layout/usr/local/bin/chatoriumd
 make package        # needs Theos + iOS 15 SDK
 ```
 

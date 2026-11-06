@@ -1,3 +1,0 @@
-Rootless packaging: Theos puts layout/ files under /var/jb automatically, so the
-LaunchDaemon plist ends up in /var/jb/Library/LaunchDaemons/. A DEBIAN/postinst
-that runs `launchctl load` is added in a later step.

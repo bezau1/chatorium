@@ -1,0 +1,48 @@
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  deb:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+          cache-dependency-path: hub/go.sum
+
+      - name: Tools
+        run: brew install ldid make dpkg xz
+
+      - name: Theos
+        run: |
+          git clone --recursive --depth 1 https://github.com/theos/theos.git "$HOME/theos"
+          echo "THEOS=$HOME/theos" >> "$GITHUB_ENV"
+
+      - name: iOS SDK (from Xcode)
+        run: |
+          SDK="$(xcrun --sdk iphoneos --show-sdk-path)"
+          echo "Using $SDK"
+          mkdir -p "$HOME/theos/sdks"
+          ln -sfn "$SDK" "$HOME/theos/sdks/$(basename "$SDK")"
+
+      - name: Build hub (Go, darwin/arm64)
+        run: gmake hub
+
+      - name: Package (.deb, rootless)
+        run: gmake package FINALPACKAGE=1
+
+      - name: Show package
+        run: |
+          ls -la packages
+          dpkg-deb -c packages/*.deb
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: chatorium-deb
+          path: packages/*.deb

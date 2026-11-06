@@ -1,4 +1,4 @@
 .theos/
 packages/
 *.deb
-app/layout/usr/local/bin/chatoriumd
+layout/usr/local/bin/chatoriumd
