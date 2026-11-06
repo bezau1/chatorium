@@ -1,0 +1,9 @@
+Package: com.bezau1.chatorium
+Name: Chatorium
+Version: 0.0.1
+Architecture: iphoneos-arm64
+Description: All your chats in one app (iMessage, WhatsApp, Telegram), on-device.
+Maintainer: bezau1
+Author: bezau1
+Section: Messaging
+Depends: firmware (>= 15.0)

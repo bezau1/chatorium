@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+<key>CFBundleIdentifier</key><string>com.bezau1.chatorium</string>
+<key>CFBundleName</key><string>Chatorium</string>
+<key>CFBundleDisplayName</key><string>Chatorium</string>
+<key>CFBundleExecutable</key><string>Chatorium</string>
+<key>CFBundleVersion</key><string>0.0.1</string>
+<key>UIDeviceFamily</key><array><integer>1</integer></array>
+<key>LSApplicationQueriesSchemes</key><array><string>whatsapp</string><string>tg</string><string>facetime</string><string>sms</string></array>
+</dict></plist>
